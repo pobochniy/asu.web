@@ -1,6 +1,4 @@
-import React from "react";
-
-function Home() {
+function HomeComponent() {
   return (
     <>
       <h1>АСУ</h1>
@@ -10,4 +8,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomeComponent;

@@ -1,8 +1,7 @@
-import React from "react";
-import AppRouterOutlet from "../app/router-outlet.component";
+import AppRouterOutlet from "./router-outlet.component";
 import SharedNavMenu from "../shared/nav/menu/menu.component";
 
-function App() {
+function AppComponent() {
   return (
     <div className="wrapper">
       <SharedNavMenu />
@@ -18,4 +17,4 @@ function App() {
     </div>
   );
 }
-export default App;
+export default AppComponent;
