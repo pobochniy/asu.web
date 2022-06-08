@@ -1,0 +1,33 @@
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../..";
+import { AuthApiService } from "../../shared/api/auth-api.service";
+import UserModel from "../../shared/models/user.model";
+
+function LoginComponent() {
+  const service = new AuthApiService();
+  var userService = useContext(UserContext);
+  let navigate = useNavigate();
+  
+  async function onSubmit() {
+    try {
+      //if (this.loginForm.valid) {
+      const usr = await service.login({ login: "Jeer", password: "123" });
+      userService.User = new UserModel(usr);
+      //this.chatService.connectionWebSocket();
+      navigate('/');
+      //}
+    } catch (Exception) {
+      alert("не подходит");
+    }
+  }
+
+  return (
+    <div>
+      <input type='submit' onClick={onSubmit} value='login' />
+      {userService.User && <p>Hi, {userService.User.shortName}</p>}
+    </div>
+  );
+}
+
+export default LoginComponent;

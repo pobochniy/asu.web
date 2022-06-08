@@ -4,14 +4,18 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import App from "./app/app.component";
+import UserService from './shared/services/user.service';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+export const UserContext = React.createContext<UserService>(new UserService());
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <UserContext.Provider value={new UserService()}>
+        <App />
+      </UserContext.Provider>
     </BrowserRouter>
   </React.StrictMode>
 );
