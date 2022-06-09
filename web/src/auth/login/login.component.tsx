@@ -24,7 +24,7 @@ function LoginComponent() {
 
   return (
     <div>
-      <input type='submit' onClick={onSubmit} value='login' />
+      <button onClick={onSubmit}>login</button>
       {userService.User && <p>Hi, {userService.User.shortName}</p>}
     </div>
   );

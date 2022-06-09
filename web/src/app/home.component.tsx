@@ -8,8 +8,6 @@ function HomeComponent() {
   var authApi = new AuthApiService();
 
   async function logOut(e: any) {
-    debugger;
-    e.preventDefault();
     service.User = null;
     await authApi.logOut();
     //this.router.navigateByUrl('/');
@@ -23,7 +21,7 @@ function HomeComponent() {
         <div>
           <p>
             Добро пожаловать, {service.User?.userName}{" "}
-            <a onClick={logOut}>[Выход]</a>
+            <button onClick={logOut}>[Выход]</button>
           </p>
           <p>Хорошего дня</p>
         </div>
