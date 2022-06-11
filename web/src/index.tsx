@@ -4,17 +4,20 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import App from "./app/app.component";
-import UserService from './shared/services/user.service';
+import UserService from "./shared/services/user.service";
+import { UserContext, ApiContext } from "./shared/contexts/global.context";
+import ApiService from "./shared/services/api.service";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-export const UserContext = React.createContext<UserService>(new UserService());
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <UserContext.Provider value={new UserService()}>
-        <App />
+        <ApiContext.Provider value={new ApiService()}>
+          <App />
+        </ApiContext.Provider>
       </UserContext.Provider>
     </BrowserRouter>
   </React.StrictMode>

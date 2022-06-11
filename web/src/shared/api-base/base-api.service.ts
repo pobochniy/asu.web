@@ -1,9 +1,8 @@
 export abstract class BaseApiService {
-  private server = "https://localhost:7111";
   private baseUrl;
 
   constructor(public apiName: string) {
-    this.baseUrl = `${this.server}/api/${apiName}/`;
+    this.baseUrl = `//api/${apiName}/`;
   }
 
   public async get<T>(url: string) {
@@ -21,11 +20,10 @@ export abstract class BaseApiService {
       },
       body: JSON.stringify(data),
     };
-    
+
     const response = await fetch(this.baseUrl + url, settings);
-    //if(typeof T == void) return;
-    // debugger;
-    // if(await response.text() === '') return '' as T;
+    // @ts-ignore
+    if (response.status === 204) return;
     const res = (await response.json()) as T;
     return res;
   }

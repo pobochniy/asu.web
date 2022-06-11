@@ -1,12 +1,11 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../..";
-import { AuthApiService } from "../../shared/api/auth-api.service";
+import { UserContext, ApiContext } from "../../shared/contexts/global.context";
 import UserModel from "../../shared/models/user.model";
 
 function LoginComponent() {
-  const service = new AuthApiService();
-  var userService = useContext(UserContext);
+  const service = useContext(ApiContext).authApi;
+  const userService = useContext(UserContext);
   let navigate = useNavigate();
   
   async function onSubmit() {

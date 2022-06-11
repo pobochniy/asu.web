@@ -1,25 +1,23 @@
 import UserModel from "../models/user.model";
 
 class UserService {
-  private _user: UserModel | null = null;
+  #user: UserModel | null = null;
 
   public get User(): UserModel | null {
-    if (this._user != null) return this._user;
+    if (this.#user != null) return this.#user;
 
     const usr = localStorage.getItem("user");
-    if (usr != null) this._user = new UserModel(JSON.parse(usr)) ;
+    if (usr != null) this.#user = new UserModel(JSON.parse(usr)) ;
 
-    return this._user;
+    return this.#user;
   }
 
   public set User(val: UserModel | null) {
     if (val == null) localStorage.removeItem("user");
     else localStorage.setItem("user", JSON.stringify(val));
 
-    this._user = val;
+    this.#user = val;
   }
-
-  constructor() {}
 
   get isAuth(): boolean {
     return this.User != null && this.User.userName != null;

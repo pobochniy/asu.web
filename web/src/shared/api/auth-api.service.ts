@@ -1,7 +1,7 @@
 import { BaseApiService } from "../api-base/base-api.service";
 import UserModel from "../models/user.model";
 
-export class AuthApiService extends BaseApiService {
+class AuthApiService extends BaseApiService {
   constructor() {
     super("Auth");
   }
@@ -15,6 +15,8 @@ export class AuthApiService extends BaseApiService {
   }
 
   public async logOut() {
-    return this.post<void>("LogOut", {});
+    return await this.post<void>("LogOut", {});
   }
 }
+
+export default AuthApiService;

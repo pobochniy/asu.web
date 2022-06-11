@@ -1,11 +1,10 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "..";
-import { AuthApiService } from "../shared/api/auth-api.service";
+import { UserContext, ApiContext } from "../shared/contexts/global.context";
 
 function HomeComponent() {
-  var service = useContext(UserContext);
-  var authApi = new AuthApiService();
+  const service = useContext(UserContext);
+  const authApi = useContext(ApiContext).authApi;
 
   async function logOut(e: any) {
     service.User = null;
