@@ -16,8 +16,15 @@ class LoginForm {
   ) {
     console.log("hello"); // TODO : 2 раза
     const { register, handleSubmit } = form;
-    this.login = register("login");
-    this.password = register("password", { required: true, minLength: 2 });
+    this.login = register("login", {
+      required: true,
+      minLength: { value: 2, message: "2" },
+      maxLength: { value: 6, message: "6" },
+    });
+    this.password = register("password", {
+      required: true,
+      minLength: { value: 3, message: "3" },
+    });
     this.handleSubmit = handleSubmit(this.#onSubmit);
   }
 

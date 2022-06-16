@@ -3,12 +3,17 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { UserContext, ApiContext } from "../../shared/contexts/global.context";
 import LoginForm from "./login.form";
+import DisplayValidation from '../../shared/forms/display.validation'
 
+// TODO : preloader
 function LoginComponent() {
   const api = useContext(ApiContext).authApi;
   const userService = useContext(UserContext);
   const hookForm = useForm();
   const form = new LoginForm(hookForm, api, userService, useNavigate());
+  const {
+    formState: { errors },
+  } = hookForm;
 
   return (
     <div className="col-md-offset-3 col-md-6">
@@ -23,6 +28,7 @@ function LoginComponent() {
           {
             <div className="col-md-10">
               <input className="form-control" {...form.login} />
+              <DisplayValidation field="login" error={errors?.login} />
             </div>
           }
         </div>
@@ -34,6 +40,7 @@ function LoginComponent() {
           {
             <div className="col-md-10">
               <input className="form-control" {...form.password} />
+              <DisplayValidation field="password" error={errors?.password} />
             </div>
           }
         </div>
