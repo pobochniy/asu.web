@@ -2,7 +2,7 @@ export abstract class BaseApiService {
   private baseUrl;
 
   constructor(public apiName: string) {
-    this.baseUrl = `//api/${apiName}/`;
+    this.baseUrl = `api/${apiName}/`;
   }
 
   public async get<T>(url: string) {

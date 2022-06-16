@@ -1,30 +1,49 @@
 import { useContext } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { UserContext, ApiContext } from "../../shared/contexts/global.context";
-import UserModel from "../../shared/models/user.model";
+import LoginForm from "./login.form";
 
 function LoginComponent() {
-  const service = useContext(ApiContext).authApi;
+  const api = useContext(ApiContext).authApi;
   const userService = useContext(UserContext);
-  let navigate = useNavigate();
-  
-  async function onSubmit() {
-    try {
-      //if (this.loginForm.valid) {
-      const usr = await service.login({ login: "Jeer", password: "123" });
-      userService.User = new UserModel(usr);
-      //this.chatService.connectionWebSocket();
-      navigate('/');
-      //}
-    } catch (Exception) {
-      alert("не подходит");
-    }
-  }
+  const hookForm = useForm();
+  const form = new LoginForm(hookForm, api, userService, useNavigate());
 
   return (
-    <div>
-      <button onClick={onSubmit}>login</button>
-      {userService.User && <p>Hi, {userService.User.shortName}</p>}
+    <div className="col-md-offset-3 col-md-6">
+      <form className="form-horizontal" onSubmit={form.handleSubmit}>
+        <h4>Use a local account to log in.</h4>
+        <hr />
+
+        <div className="form-group row">
+          <label className="col-md-2 control-label" htmlFor="login">
+            Login, Email or Phone
+          </label>
+          {
+            <div className="col-md-10">
+              <input className="form-control" {...form.login} />
+            </div>
+          }
+        </div>
+
+        <div className="form-group row">
+          <label className="col-md-2 control-label" htmlFor="password">
+            Password
+          </label>
+          {
+            <div className="col-md-10">
+              <input className="form-control" {...form.password} />
+            </div>
+          }
+        </div>
+
+        <div className="form-group row">
+          <div className="col-md-offset-2 col-md-10">
+            <button className="btn btn-primary">Log in</button>
+          </div>
+        </div>
+      </form>
     </div>
   );
 }
