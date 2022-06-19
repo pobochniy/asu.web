@@ -4,9 +4,8 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import App from "./app/app.component";
-import UserService from "./shared/services/user.service";
-import { UserContext, ApiContext } from "./shared/contexts/global.context";
-import ApiService from "./shared/services/api.service";
+import { ApiProvider } from "./shared/contexts/api.provider";
+import { UserProvider } from "./shared/contexts/user.provider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -14,11 +13,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserContext.Provider value={new UserService()}>
-        <ApiContext.Provider value={new ApiService()}>
+      <UserProvider>
+        <ApiProvider>
           <App />
-        </ApiContext.Provider>
-      </UserContext.Provider>
+        </ApiProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

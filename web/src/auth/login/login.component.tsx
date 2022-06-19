@@ -1,15 +1,15 @@
-import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { UserContext, ApiContext } from "../../shared/contexts/global.context";
 import LoginForm from "./login.form";
 import DisplayValidation from "../../shared/forms/display.validation";
 import SummaryValidation from "../../shared/forms/summary.validation";
+import { useApi } from "../../shared/contexts/api.provider";
+import { useUser } from "../../shared/contexts/user.provider";
 
 // TODO : preloader
 function LoginComponent() {
-  const api = useContext(ApiContext).authApi;
-  const userService = useContext(UserContext);
+  const api = useApi().authApi;
+  const userService = useUser();
   const hookForm = useForm();
   const form = new LoginForm(hookForm, api, userService, useNavigate());
   const {
