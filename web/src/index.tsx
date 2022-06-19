@@ -4,6 +4,8 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import App from "./app/app.component";
+import { ApiProvider } from "./shared/contexts/api.provider";
+import { UserProvider } from "./shared/contexts/user.provider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -11,7 +13,11 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <UserProvider>
+        <ApiProvider>
+          <App />
+        </ApiProvider>
+      </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

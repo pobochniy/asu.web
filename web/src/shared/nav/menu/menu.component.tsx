@@ -17,8 +17,8 @@ function SharedNavMenu() {
           </Link>
         </li>
         <li>
-          <Link to="/about">
-            <i className="fas fa-home"></i>About
+          <Link to="/login">
+            <i className="fas fa-home"></i>Login
           </Link>
         </li>
       </ul>
