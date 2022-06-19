@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { UserContext, ApiContext } from "../../shared/contexts/global.context";
 import LoginForm from "./login.form";
-import DisplayValidation from '../../shared/forms/display.validation'
+import DisplayValidation from "../../shared/forms/display.validation";
+import SummaryValidation from "../../shared/forms/summary.validation";
 
 // TODO : preloader
 function LoginComponent() {
@@ -44,6 +45,8 @@ function LoginComponent() {
             </div>
           }
         </div>
+
+        <SummaryValidation errors={form.summaryErrors} />
 
         <div className="form-group row">
           <div className="col-md-offset-2 col-md-10">

@@ -6,7 +6,7 @@ type DisplayValidationProps = {
 };
 
 type DisplayError = {
-  type: "required" | "minLength" | "maxLength";
+  type: "required" | "minLength" | "maxLength" | "custom";
   message: string;
 };
 
@@ -15,6 +15,9 @@ const DisplayValidation = (props: DisplayValidationProps) => {
 
   let errMsg = "";
   switch (props.error.type) {
+    case "custom":
+      errMsg = props.error.message;
+      break;
     case "required":
       errMsg = props.field + " field is required";
       break;
