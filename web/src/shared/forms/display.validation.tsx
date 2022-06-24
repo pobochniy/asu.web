@@ -1,12 +1,12 @@
 import React from "react";
 
 type DisplayValidationProps = {
-  field: string;
+  field?: string;
   error: DisplayError | null;
 };
 
 type DisplayError = {
-  type: "required" | "minLength" | "maxLength" | "custom";
+  type: "required" | "minLength" | "maxLength" | "custom" | "apiError";
   message: string;
 };
 
@@ -15,6 +15,7 @@ const DisplayValidation = (props: DisplayValidationProps) => {
 
   let errMsg = "";
   switch (props.error.type) {
+    case undefined:
     case "custom":
       errMsg = props.error.message;
       break;

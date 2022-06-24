@@ -27,9 +27,14 @@ export abstract class BaseApiService {
     // @ts-ignore
     if (response.status === 204) return;
 
-    const res = await response.json();
-    if (response.status === 422) throw new ValidationException(res);
+    const resText = await response.text();
+    switch (response.status) {
+      case 400:
+        throw new Error(resText);
+      case 422:
+        throw new ValidationException(JSON.parse(resText));
+    }
 
-    return res as T;
+    return JSON.parse(resText) as T;
   }
 }

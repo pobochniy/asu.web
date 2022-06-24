@@ -9,9 +9,7 @@ class LoginForm {
   public login: any;
   public password: any;
   public handleSubmit: any;
-  public formState: any;
   public setError: any;
-  public summaryErrors: string[] = [];
 
   constructor(
     private form: any, // TODO : типы
@@ -20,19 +18,19 @@ class LoginForm {
     private navigate: NavigateFunction
   ) {
     console.log("hello"); // TODO : 2 раза
-    const { register, handleSubmit, formState, setError } = form;
+    const { register, handleSubmit, setError } = form;
     this.handleSubmit = handleSubmit(this.#onSubmit);
-    this.formState = formState;
     this.setError = setError;
 
     this.login = register("login", {
       required: true,
-      minLength: { value: 2, message: "2" },
-      maxLength: { value: 6, message: "6" },
+      minLength: { value: 3, message: "3" },
+      maxLength: { value: 20, message: "20" },
     });
     this.password = register("password", {
       required: true,
       minLength: { value: 3, message: "3" },
+      maxLength: { value: 20, message: "20" },
     });
   }
 
@@ -45,22 +43,26 @@ class LoginForm {
       if (ex instanceof ValidationException) {
         this.#setValidationErrors(Object.keys(ex.modelState), ex.modelState);
       }
+
+      this.#setApiError(ex?.message);
     }
   };
 
   #setValidationErrors(keys: string[], err: ModelStateDictionary) {
-    this.summaryErrors = [];
     const that = this;
-    keys.map(key => {
-      err[key].map(msg => {
-        //const jsField = key.charAt(0).toLowerCase() + key.slice(1); // TODO : с бекенда приходит с большой буквы
-        const jsField = key;
+    keys.map((key) => {
+      err[key].map((msg) => {
+        const jsField = key.charAt(0).toLowerCase() + key.slice(1); // TODO : с бекенда приходит с большой буквы
         // @ts-ignore
         that[jsField]
           ? that.setError(jsField, { type: "custom", message: msg })
-          : that.summaryErrors.push(msg);
+          : that.setError("apiError", { message: msg });
       });
     });
+  }
+
+  #setApiError(msg: string){
+    this.setError("apiError", { message: msg || 'Упс' });
   }
 }
 
