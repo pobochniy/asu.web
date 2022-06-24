@@ -5,6 +5,7 @@ import ValidationException from "../../shared/Exceptions/validation.exception";
 import UserModel from "../../shared/models/user.model";
 import UserService from "../../shared/services/user.service";
 
+// TODO : useLoginForm
 class LoginForm {
   public login: any;
   public password: any;

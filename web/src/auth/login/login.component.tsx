@@ -6,6 +6,7 @@ import { useApi } from "../../shared/contexts/api.provider";
 import { useUser } from "../../shared/contexts/user.provider";
 
 // TODO : preloader
+// TODO : second click dont worked
 function LoginComponent() {
   console.log("LoginComponent");
   const api = useApi().authApi;
