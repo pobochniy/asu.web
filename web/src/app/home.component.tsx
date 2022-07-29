@@ -3,30 +3,29 @@ import { useUser } from "../shared/contexts/user.provider";
 import { useApi } from "../shared/contexts/api.provider";
 
 function HomeComponent() {
-  const service = useUser();
+  const userService = useUser();
   const authApi = useApi().authApi;
 
   async function logOut(e: any) {
-    service.User = null;
+    userService.logOut();
     await authApi.logOut();
-    //this.router.navigateByUrl('/');
   }
 
   return (
     <>
       <h1>АСУ</h1>
 
-      {service.isAuth && (
+      {userService.isAuth() && (
         <div>
           <p>
-            Добро пожаловать, {service.User?.userName}{" "}
+            Добро пожаловать, {userService.getUser()?.userName}{" "}
             <button onClick={logOut}>[Выход]</button>
           </p>
           <p>Хорошего дня</p>
         </div>
       )}
 
-      {!service.isAuth && (
+      {!userService.isAuth() && (
         <div>
           <ul>
             <li>

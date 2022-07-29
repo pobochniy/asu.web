@@ -1,8 +1,10 @@
+import ValidationException from "../exceptions/validation.exception";
+
 export abstract class BaseApiService {
   private baseUrl;
 
   constructor(public apiName: string) {
-    this.baseUrl = `//api/${apiName}/`;
+    this.baseUrl = `api/${apiName}/`;
   }
 
   public async get<T>(url: string) {
@@ -11,7 +13,7 @@ export abstract class BaseApiService {
     return res;
   }
 
-  public async post<T>(url: string, data: any = {}): Promise<T> {
+  public async post<T>(url: string, data: any = {}) {
     const settings = {
       method: "POST",
       headers: {
@@ -24,7 +26,15 @@ export abstract class BaseApiService {
     const response = await fetch(this.baseUrl + url, settings);
     // @ts-ignore
     if (response.status === 204) return;
-    const res = (await response.json()) as T;
-    return res;
+
+    const resText = await response.text();
+    switch (response.status) {
+      case 400:
+        throw new Error(resText);
+      case 422:
+        throw new ValidationException(JSON.parse(resText));
+    }
+
+    return JSON.parse(resText) as T;
   }
 }

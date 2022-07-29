@@ -11,7 +11,7 @@ class AuthApiService extends BaseApiService {
   }
 
   public async login(model: any) {
-    return this.post<UserModel>("Login", model);;
+    return this.post<UserModel>("Login", model);
   }
 
   public async logOut() {

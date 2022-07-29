@@ -1,31 +1,44 @@
 import UserModel from "../models/user.model";
+import React from "react";
 
-class UserService {
-  #user: UserModel | null = null;
+const UserService = () => {
+  const localStorageKey = "user";
+  const [user, setStateUser] = React.useState<UserModel | null>(null);
 
-  public get User(): UserModel | null {
-    if (this.#user != null) return this.#user;
+  function getUser(): UserModel | null {
+    if (user != null) return user;
 
-    const usr = localStorage.getItem("user");
-    if (usr != null) this.#user = new UserModel(JSON.parse(usr)) ;
+    const usr = localStorage.getItem(localStorageKey);
+    if (usr != null) setStateUser(new UserModel(JSON.parse(usr)));
 
-    return this.#user;
+    return user;
   }
 
-  public set User(val: UserModel | null) {
-    if (val == null) localStorage.removeItem("user");
-    else localStorage.setItem("user", JSON.stringify(val));
-
-    this.#user = val;
+  function setUser(val: UserModel) {
+    localStorage.setItem(localStorageKey, JSON.stringify(val));
+    setStateUser(val);
   }
 
-  get isAuth(): boolean {
-    return this.User != null && this.User.userName != null;
+  function logOut(){
+    localStorage.removeItem(localStorageKey);
+    setStateUser(null);
   }
 
-  hasRole(roleId: number): boolean {
-    if (!this.User || !this.isAuth || this.User.roles == null) return false;
-    return this.User.roles.indexOf(roleId) > -1;
+  function isAuth(): boolean {
+    return user != null && user.userName != null;
+  }
+
+  function hasRole(roleId: number): boolean {
+    if (!user || !isAuth || user.roles == null) return false;
+    return user.roles.indexOf(roleId) > -1;
+  }
+
+  return{
+    getUser,
+    setUser,
+    logOut,
+    isAuth,
+    hasRole
   }
 }
 
