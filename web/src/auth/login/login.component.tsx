@@ -1,21 +1,10 @@
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import LoginForm from "./login.form";
 import DisplayValidation from "../../shared/forms/display.validation";
-import { useApi } from "../../shared/contexts/api.provider";
-import { useUser } from "../../shared/contexts/user.provider";
+import useLoginForm from "./useLoginForm";
 
 // TODO : preloader
-// TODO : second click dont worked
 function LoginComponent() {
   console.log("LoginComponent");
-  const api = useApi().authApi;
-  const userService = useUser();
-  const hookForm = useForm();
-  const form = new LoginForm(hookForm, api, userService, useNavigate());
-  const {
-    formState: { errors },
-  } = hookForm;
+  const form = useLoginForm();
 
   return (
     <div className="col-md-offset-3 col-md-6">
@@ -27,27 +16,23 @@ function LoginComponent() {
           <label className="col-md-2 control-label" htmlFor="login">
             Login, Email or Phone
           </label>
-          {
             <div className="col-md-10">
-              <input className="form-control" {...form.login} />
-              <DisplayValidation field="login" error={errors?.login} />
+              <input className="form-control" {...form.registerField('login')} />
+              <DisplayValidation field="login" error={form.errors?.login} />
             </div>
-          }
         </div>
 
         <div className="form-group row">
           <label className="col-md-2 control-label" htmlFor="password">
             Password
           </label>
-          {
             <div className="col-md-10">
-              <input className="form-control" {...form.password} />
-              <DisplayValidation field="password" error={errors?.password} />
+              <input className="form-control" {...form.registerField('password')} />
+              <DisplayValidation field="password" error={form.errors?.password} />
             </div>
-          }
         </div>
 
-        <DisplayValidation error={errors?.apiError} />
+        <DisplayValidation error={form.errors?.apiError} />
 
         <div className="form-group row">
           <div className="col-md-offset-2 col-md-10">

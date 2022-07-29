@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
 import UserService from "../services/user.service";
 
-const userService = new UserService();
-const userContext = React.createContext(userService);
+const userContext = React.createContext(null);
 
 export const UserProvider = ({ children }: any) => {
+  const userService = UserService();
+
   return (
-    <userContext.Provider value={userService}>{children}</userContext.Provider>
+    <userContext.Provider value={userService}>
+      {children}
+    </userContext.Provider>
   );
 };
 

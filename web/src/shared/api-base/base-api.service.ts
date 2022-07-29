@@ -1,4 +1,4 @@
-import ValidationException from "../Exceptions/validation.exception";
+import ValidationException from "../exceptions/validation.exception";
 
 export abstract class BaseApiService {
   private baseUrl;
