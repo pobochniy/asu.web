@@ -1,12 +1,14 @@
 import { Routes, Route } from "react-router-dom";
-import LoginComponent from "../auth/login/login.component";
-import HomeComponent from "./home.component";
+import LoginPage from "../auth/login/loginPage";
+import EpicPage from "../epic/details/detailsPage";
+import HomePage from "./homePage";
 
 function AppRouterOutlet() {
   return (
     <Routes>
-      <Route path="/" element={<HomeComponent />} />
-      <Route path="/login" element={<LoginComponent />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/epic/details" element={<EpicPage />} />
     </Routes>
   );
 }

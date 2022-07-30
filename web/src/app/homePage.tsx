@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useUser } from "../shared/contexts/user.provider";
 import { useApi } from "../shared/contexts/api.provider";
 
-function HomeComponent() {
+function HomePage() {
   const userService = useUser();
   const authApi = useApi().authApi;
 
@@ -41,4 +41,4 @@ function HomeComponent() {
   );
 }
 
-export default HomeComponent;
+export default HomePage;

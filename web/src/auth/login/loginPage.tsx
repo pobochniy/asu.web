@@ -2,8 +2,8 @@ import DisplayValidation from "../../shared/forms/display.validation";
 import useLoginForm from "./useLoginForm";
 
 // TODO : preloader
-function LoginComponent() {
-  console.log("LoginComponent");
+function LoginPage() {
+  console.log("LoginPage");
   const form = useLoginForm();
 
   return (
@@ -44,4 +44,4 @@ function LoginComponent() {
   );
 }
 
-export default LoginComponent;
+export default LoginPage;

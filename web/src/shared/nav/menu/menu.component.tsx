@@ -21,6 +21,11 @@ function SharedNavMenu() {
             <i className="fas fa-home"></i>Login
           </Link>
         </li>
+        <li>
+          <Link to="/epic/details?id=1">
+            <i className="fas fa-home"></i>Epic
+          </Link>
+        </li>
       </ul>
     </nav>
   );
