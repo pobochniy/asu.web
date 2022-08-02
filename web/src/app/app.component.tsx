@@ -4,7 +4,7 @@ import { useUser } from "../shared/contexts/user.provider";
 
 function AppComponent() {
   console.log('AppComponent');
-  useUser().getUser();
+  
   return (
     <div className="wrapper">
       <SharedNavMenu />

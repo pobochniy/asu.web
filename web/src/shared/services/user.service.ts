@@ -1,16 +1,17 @@
 import UserModel from "../models/user.model";
-import React from "react";
+import React, { useEffect } from "react";
 
 const UserService = () => {
   const localStorageKey = "user";
   const [user, setStateUser] = React.useState<UserModel | null>(null);
 
-  function getUser(): UserModel | null {
-    if (user != null) return user;
-
+  useEffect(() => {
+    console.log("UserService useEffect ====================");
     const usr = localStorage.getItem(localStorageKey);
-    if (usr != null) setStateUser(new UserModel(JSON.parse(usr)));
+    if (usr !== null) setStateUser(new UserModel(JSON.parse(usr)));
+  }, []);
 
+  function getUser(): UserModel | null {
     return user;
   }
 
@@ -19,13 +20,13 @@ const UserService = () => {
     setStateUser(val);
   }
 
-  function logOut(){
+  function logOut() {
     localStorage.removeItem(localStorageKey);
     setStateUser(null);
   }
 
   function isAuth(): boolean {
-    return user != null && user.userName != null;
+    return user !== null && user.userName !== null;
   }
 
   function hasRole(roleId: number): boolean {
@@ -33,13 +34,13 @@ const UserService = () => {
     return user.roles.indexOf(roleId) > -1;
   }
 
-  return{
+  return {
     getUser,
     setUser,
     logOut,
     isAuth,
-    hasRole
-  }
-}
+    hasRole,
+  };
+};
 
 export default UserService;
