@@ -21,7 +21,7 @@ function SharedUserName(props: SharedUserNameProps) {
       console.log(usr);
       setUser(usr);
     })();
-  }, [props.userId]);
+  }, [props.userId, users]);
 
   return <span>{user?.shortName}</span>;
 }

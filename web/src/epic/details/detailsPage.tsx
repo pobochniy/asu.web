@@ -1,56 +1,36 @@
-import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import { useApi } from "../../shared/contexts/api.provider";
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../../shared/contexts/user.provider";
-import { EpicModel } from "../../shared/models/epic.model";
 import { UserRoleEnum } from "../../shared/enums/user-role.enum";
-import { IssuePriorityEnum } from "../../shared/enums/issue-priority.enum";
-import SharedUserName from "../../shared/user/SharedUserName";
+import SharedUserName from "../../shared/components/UserName";
+import dateFomat from "../../shared/helpers/dateFormat";
+import Priority from "../../shared/components/Priority";
+import useEpicDetails from "./useEpicDetails";
 
-// TODO : preloader
+// TODO : preloader skeleton
 function DetailsPage() {
   console.log("EpicDetailsPage");
-  const api = useApi().epicApi;
-  const roles = UserRoleEnum;
-
-  const [searchParams] = useSearchParams();
-  const [epic, setEpic] = useState<EpicModel>(null);
-
-  const epicId = +searchParams.get("id");
+  const epic = useEpicDetails();
   const userService = useUser();
 
-  useEffect(() => {
-    if (!epicId) return;
+  const navigate = useNavigate();
+  const redirectToEdit = (controllerName: string, id: number) => {
+    navigate(`/epic/edit/${epic.id}`);
+  };
 
-    (async () => {
-      const res = await api.Details(epicId);
-      setEpic(new EpicModel(res));
-    })();
-  }, []);
-
-  function GetPriority(id: number) {
-    const priority = IssuePriorityEnum[id];
-    if (priority) return priority;
-
-    return id;
-  }
-
-  function dateFomat(date: Date) {
-    if(!date) return '';
-    return date.toISOString().split("T")[0];
-  }
+  if (!epic) return <div>Loading...</div>;
 
   return (
     <div>
       <h4>
-        Epic {epic?.name}
-        <Link to={`/epic/edit/${epic?.id}`}>
-          <button
-            type="submit"
-            className="btn btn-info btn-sm"
-            disabled={!userService.hasRole(roles.epicCrud)}
-          >Edit</button>
-        </Link>
+        Epic {epic.name}
+        <button
+          className="btn btn-info btn-sm"
+          onClick={() => redirectToEdit("epic", epic.id)}
+          type="submit"
+          disabled={!userService.hasRole(UserRoleEnum.epicCrud)}
+        >
+          Edit
+        </button>
       </h4>
 
       <div className="row form-group">
@@ -59,7 +39,7 @@ function DetailsPage() {
             Assignee
           </label>
           <b>
-            <SharedUserName userId={epic?.assignee} htmlId="assignee" />
+            <SharedUserName userId={epic.assignee} htmlId="assignee" />
           </b>
         </div>
         <div className="col-lg-3">
@@ -67,14 +47,16 @@ function DetailsPage() {
             Reporter
           </label>
           <b>
-            <SharedUserName userId={epic?.reporter} htmlId="reporter" />
+            <SharedUserName userId={epic.reporter} htmlId="reporter" />
           </b>
         </div>
         <div className="col-lg-3">
           <label className="mr-2" htmlFor="priority">
             Priority
           </label>
-          <b>{GetPriority(epic?.priority)}</b>
+          <b>
+            <Priority id={epic.priority} />
+          </b>
         </div>
         <div className="col-lg-3">
           <label className="mr-2" htmlFor="priority">
@@ -90,8 +72,7 @@ function DetailsPage() {
           rows={10}
           disabled={true}
           value={epic?.description}
-        >
-        </textarea>
+        ></textarea>
       </div>
       <br />
       <br />
