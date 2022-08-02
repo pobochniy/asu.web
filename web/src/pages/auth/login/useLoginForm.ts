@@ -3,10 +3,10 @@ import {
   useForm,
 } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { ModelStateDictionary } from "../../shared/api-base/types";
-import ValidationException from "../../shared/exceptions/validation.exception";
-import { useApi } from "../../shared/contexts/api.provider";
-import { useUser } from "../../shared/contexts/user.provider";
+import { ModelStateDictionary } from "../../../shared/api/types";
+import ValidationException from "../../../shared/exceptions/validation.exception";
+import { useApi } from "../../../shared/contexts/api.provider";
+import { useUser } from "../../../shared/contexts/user.provider";
 
 function useLoginForm() {
   const hookForm = useForm();

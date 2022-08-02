@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import LoginPage from "../auth/login/loginPage";
-import EpicPage from "../epic/details/detailsPage";
-import HomePage from "./homePage";
+import LoginPage from "../auth/login/LoginPage";
+import EpicPage from "../epic/details/DetailsPage";
+import HomePage from "./HomePage";
 
 function AppRouterOutlet() {
   return (

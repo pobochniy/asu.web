@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../../shared/contexts/user.provider";
-import { UserRoleEnum } from "../../shared/enums/user-role.enum";
-import SharedUserName from "../../shared/components/UserName";
-import dateFomat from "../../shared/helpers/dateFormat";
-import Priority from "../../shared/components/Priority";
+import { useUser } from "../../../shared/contexts/user.provider";
+import { UserRoleEnum } from "../../../shared/enums/user-role.enum";
+import SharedUserName from "../../../widgets/UserName";
+import dateFomat from "../../../lib/dateFormat";
+import Priority from "../../../widgets/Priority";
 import useEpicDetails from "./useEpicDetails";
 
 // TODO : preloader skeleton

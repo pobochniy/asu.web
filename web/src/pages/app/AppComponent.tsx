@@ -1,10 +1,9 @@
-import AppRouterOutlet from "./router-outlet.component";
-import SharedNavMenu from "../shared/nav/menu/menu.component";
-import { useUser } from "../shared/contexts/user.provider";
+import AppRouterOutlet from "./AppRouterOutlet";
+import SharedNavMenu from "../../widgets/nav/menu/menu.component";
 
 function AppComponent() {
   console.log('AppComponent');
-  
+
   return (
     <div className="wrapper">
       <SharedNavMenu />

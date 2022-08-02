@@ -1,5 +1,5 @@
 import React from "react";
-import { IssuePriorityEnum } from "../enums/issue-priority.enum";
+import { IssuePriorityEnum } from "../shared/enums/issue-priority.enum";
 
 function Priority({ id }: { id: number }) {
   const priority = IssuePriorityEnum[id];

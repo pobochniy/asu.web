@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useApi } from "../contexts/api.provider";
-import { UserProfileModel } from "../models/user-profile.model";
+import { useApi } from "../shared/contexts/api.provider";
+import { UserProfileModel } from "../shared/models/user-profile.model";
 
 type SharedUserNameProps = {
   userId: string;

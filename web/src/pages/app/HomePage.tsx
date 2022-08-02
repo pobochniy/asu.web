@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useUser } from "../shared/contexts/user.provider";
-import { useApi } from "../shared/contexts/api.provider";
+import { useUser } from "../../shared/contexts/user.provider";
+import { useApi } from "../../shared/contexts/api.provider";
 
 function HomePage() {
   const userService = useUser();

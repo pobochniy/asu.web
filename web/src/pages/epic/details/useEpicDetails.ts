@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useApi } from "../../shared/contexts/api.provider";
-import { EpicModel } from "../../shared/models/epic.model";
+import { useApi } from "../../../shared/contexts/api.provider";
+import { EpicModel } from "../../../shared/models/epic.model";
 
 function useEpicDetails(){
     console.log("useEpicDetails");
