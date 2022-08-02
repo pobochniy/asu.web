@@ -1,4 +1,4 @@
-import DisplayValidation from "../../../shared/forms/display.validation";
+import DisplayValidation from "../../../widgets/forms/DisplayValidation";
 import useLoginForm from "./useLoginForm";
 
 // TODO : preloader
