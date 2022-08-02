@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./app/app.component";
 import { ApiProvider } from "./shared/contexts/api.provider";
 import { UserProvider } from "./shared/contexts/user.provider";
+import 'bootstrap/dist/css/bootstrap.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
