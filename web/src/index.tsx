@@ -4,7 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import App from "./pages/app/AppComponent";
+import App from "./features/app/AppComponent";
 import { ApiProvider } from "./shared/contexts/api.provider";
 import { UserProvider } from "./shared/contexts/user.provider";
 
