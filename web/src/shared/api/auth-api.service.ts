@@ -1,4 +1,4 @@
-import { BaseApiService } from "../api-base/base-api.service";
+import { BaseApiService } from "./base-api.service";
 import UserModel from "../models/user.model";
 
 class AuthApiService extends BaseApiService {

@@ -1,5 +1,5 @@
 import { UserProfileModel } from "../models/user-profile.model";
-import { BaseApiService } from "../api-base/base-api.service";
+import { BaseApiService } from "./base-api.service";
 
 class UsersApiService extends BaseApiService {
   private storage: UserProfileModel[] = null;
@@ -19,7 +19,7 @@ class UsersApiService extends BaseApiService {
 
   public async getUser(userId: string) {
     const profiles = await this.GetProfiles();
-    return profiles.find(x => x.id == userId) || new UserProfileModel();
+    return profiles.find(x => x.id === userId) || new UserProfileModel();
   }
 
   public async getUserRoles(userId: string) {
@@ -33,7 +33,7 @@ class UsersApiService extends BaseApiService {
   public async changeUser(model: UserProfileModel) {
     if (!this.storage) return;
 
-    const idx = this.storage.findIndex(x => x.id == model.id);
+    const idx = this.storage.findIndex(x => x.id === model.id);
     if (idx > -1) {
       this.storage.splice(idx, 1);
     }

@@ -1,4 +1,4 @@
-import { ModelStateDictionary } from "../api-base/types";
+import { ModelStateDictionary } from "../api/types";
 
 class ValidationException extends Error {
   constructor(public modelState: ModelStateDictionary) {
