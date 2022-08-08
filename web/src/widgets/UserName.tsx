@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useApi } from "../shared/contexts/api.provider";
 import { UserProfileModel } from "../shared/models/user-profile.model";
 
-type SharedUserNameProps = {
+export type UserNameProps = {
   userId: string;
-  htmlId: string;
 };
 
-function SharedUserName(props: SharedUserNameProps) {
-  console.log("SharedUserName");
+function UserName(props: UserNameProps) {
   const users = useApi().usersApi;
   const [user, setUser] = useState<UserProfileModel>(null);
 
@@ -16,9 +14,7 @@ function SharedUserName(props: SharedUserNameProps) {
     if (!props.userId) return;
 
     (async () => {
-      console.log("effect SharedUserName");
       let usr = await users.getUser(props.userId);
-      console.log(usr);
       setUser(usr);
     })();
   }, [props.userId, users]);
@@ -26,4 +22,4 @@ function SharedUserName(props: SharedUserNameProps) {
   return <span>{user?.shortName}</span>;
 }
 
-export default SharedUserName;
+export default UserName;
