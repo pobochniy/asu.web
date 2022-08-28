@@ -4,11 +4,12 @@ import { UserProfileModel } from "../shared/models/user-profile.model";
 
 export type UserNameProps = {
   userId: string;
+  htmlId: string;
 };
 
 function UserName(props: UserNameProps) {
   const users = useApi().usersApi;
-  const [user, setUser] = useState<UserProfileModel>(null);
+  const [user, setUser] = useState<UserProfileModel>();
 
   useEffect(() => {
     if (!props.userId) return;
@@ -19,7 +20,7 @@ function UserName(props: UserNameProps) {
     })();
   }, [props.userId, users]);
 
-  return <span>{user?.shortName}</span>;
+  return <span id={props.htmlId}>{user?.shortName}</span>;
 }
 
 export default UserName;
