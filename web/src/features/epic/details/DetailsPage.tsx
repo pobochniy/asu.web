@@ -20,7 +20,7 @@ function DetailsPage() {
   return (
     <div>
       <h4>
-        Epic {epic.name}
+        Epic <span id='epicName'>{epic.name}</span>
         <button
           className="btn btn-info btn-sm"
           onClick={() => navigate(`/epic/edit?id=${epic.id}`)}
@@ -32,15 +32,15 @@ function DetailsPage() {
       </h4>
       <div className="row form-group">
         <BootstrapCol bWidth="col-lg-3" labelText="Assignee">
-          <UserName userId={epic.assignee} />
+          <UserName userId={epic.assignee} htmlId='assignee' />
         </BootstrapCol>
         <BootstrapCol bWidth="col-lg-3" labelText="Reporter">
-          <UserName userId={epic.reporter} />
+          <UserName userId={epic.reporter} htmlId='reporter' />
         </BootstrapCol>
         <BootstrapCol bWidth="col-lg-3" labelText="Priority">
           <Priority id={epic.priority} />
         </BootstrapCol>
-        <BootstrapCol bWidth="col-lg-3" labelText="Priority">
+        <BootstrapCol bWidth="col-lg-3" labelText="Due date">
           {dateFomat(epic.dueDate)}
         </BootstrapCol>
       </div>

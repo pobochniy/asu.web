@@ -18,9 +18,9 @@ function useLoginForm() {
   const handleSubmit = hookForm.handleSubmit(async (data: any) => {
     try {
       const apiUsr = await api.login(data);
-      user.setUser(apiUsr);
+      user.setUser(apiUsr!);
       navigate("/");
-    } catch (ex) {
+    } catch (ex: any) {
       if (ex instanceof ValidationException) {
         setValidationErrors(Object.keys(ex.modelState), ex.modelState);
       }
@@ -33,14 +33,13 @@ function useLoginForm() {
     keys: string[],
     err: ModelStateDictionary
   ) {
-    const that = this;
     keys.map((key) => {
       err[key].map((msg) => {
         const jsField = key.charAt(0).toLowerCase() + key.slice(1); // TODO : с бекенда приходит с большой буквы
-        // @ts-ignore
-        that[jsField]
-          ? that.hookForm.setError(jsField, { type: "custom", message: msg })
-          : that.hookForm.setError("apiError", { message: msg });
+        //-/ @-ts-ignore
+        fields[jsField]
+          ? hookForm.setError(jsField, { type: "custom", message: msg })
+          : hookForm.setError("apiError", { message: msg });
       });
     });
   };

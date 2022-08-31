@@ -2,22 +2,23 @@ import { UserProfileModel } from "../models/user-profile.model";
 import { BaseApiService } from "./base-api.service";
 
 class UsersApiService extends BaseApiService {
-  private storage: UserProfileModel[] = null;
+  private storage?: UserProfileModel[] = undefined;
 
   constructor() {
     super('Users');
-    console.log('UsersApiService')
   }
 
   public async GetProfiles() {
     if (!this.storage) {
-      this.storage = (await this.get<any[]>('GetProfiles')).map(x => new UserProfileModel(x));
+      const profiles = await this.get<any[]>('GetProfiles');
+      console.log(profiles);
+      this.storage = profiles.map(x => new UserProfileModel(x));
     }
 
     return this.storage;
   }
 
-  public async getUser(userId: string) {
+  public async getUser(userId: string): Promise<UserProfileModel> {
     const profiles = await this.GetProfiles();
     return profiles.find(x => x.id === userId) || new UserProfileModel();
   }

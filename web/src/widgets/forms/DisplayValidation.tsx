@@ -1,8 +1,10 @@
 import React from "react";
+import { DeepRequired, FieldError, FieldErrorsImpl, FieldValues } from "react-hook-form";
 
 type DisplayValidationProps = {
   field?: string;
-  error: DisplayError | null;
+  //error: FieldError | FieldErrorsImpl<DeepRequired<any>> | undefined//DisplayError | undefined;
+  error: DisplayError | undefined | any;
 };
 
 type DisplayError = {
@@ -13,32 +15,25 @@ type DisplayError = {
 const DisplayValidation = (props: DisplayValidationProps) => {
   if (!props.error) return <></>;
 
-  let errMsg = "";
-  switch (props.error.type) {
+  const errMsg = buildErrMsg(props.error.type, props.error.message, props.field, props.error);
+
+  return <div className="error-msg">{errMsg+''}</div>;
+};
+
+const buildErrMsg = (type: string, message: string, field: string | undefined, error: DisplayError | undefined | any) =>{
+  switch (type) {
     case undefined:
     case "custom":
-      errMsg = props.error.message;
-      break;
+      return message;
     case "required":
-      errMsg = props.field + " field is required";
-      break;
+      return field + " field is required";
     case "minLength":
-      errMsg =
-        props.field +
-        " field min length " +
-        (props.error.message.length && props.error.message);
-      break;
+      return `${field} field min length ${message?.length && error.message}`;
     case "maxLength":
-      errMsg =
-        props.field +
-        " field max length " +
-        (props.error.message.length && props.error.message);
-      break;
+      return `${field} field max length ${error.message?.length && error.message}`;
     default:
       throw new Error("validation type is unknown");
   }
-
-  return <div className="error-msg">{errMsg}</div>;
-};
+}
 
 export default DisplayValidation;
