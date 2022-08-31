@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import UserModel from "../models/user.model";
-import UserService from "../services/user.service";
 
 const defaultProps = {
   getUser: (): UserModel | undefined => {return undefined},
@@ -13,7 +12,6 @@ const defaultProps = {
 const userContext = React.createContext<typeof defaultProps>(defaultProps);
 
 export const UserProvider = ({ children }: any) => {
-  //const userService = UserService();
   const localStorageKey = "user";
   const [user, setStateUser] = useState<UserModel>();
 

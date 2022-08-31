@@ -15,32 +15,25 @@ type DisplayError = {
 const DisplayValidation = (props: DisplayValidationProps) => {
   if (!props.error) return <></>;
 
-  let errMsg: string | undefined;// | FieldErrorsImpl<DeepRequired<any>> = "";
-  switch (props.error.type) {
-    case undefined:
-    case "custom":
-      errMsg = props.error.message;
-      break;
-    case "required":
-      errMsg = props.field + " field is required";
-      break;
-    case "minLength":
-      errMsg =
-        props.field +
-        " field min length " +
-        (props.error.message?.length && props.error.message);
-      break;
-    case "maxLength":
-      errMsg =
-        props.field +
-        " field max length " +
-        (props.error.message?.length && props.error.message);
-      break;
-    default:
-      throw new Error("validation type is unknown");
-  }
+  const errMsg = buildErrMsg(props.error.type, props.error.message, props.field, props.error);
 
   return <div className="error-msg">{errMsg+''}</div>;
 };
+
+const buildErrMsg = (type: string, message: string, field: string | undefined, error: DisplayError | undefined | any) =>{
+  switch (type) {
+    case undefined:
+    case "custom":
+      return message;
+    case "required":
+      return field + " field is required";
+    case "minLength":
+      return `${field} field min length ${message?.length && error.message}`;
+    case "maxLength":
+      return `${field} field max length ${error.message?.length && error.message}`;
+    default:
+      throw new Error("validation type is unknown");
+  }
+}
 
 export default DisplayValidation;
